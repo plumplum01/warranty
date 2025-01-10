@@ -54,28 +54,13 @@ export default function Card() {
         <div>
         <main id="app">
             <section className="cards">
-                <div className="card charizard animated"></div>
-                <div className="card pika animated"></div>
                 <div className="card eevee animated"></div>
-                <div className="card mewtwo animated"></div>
             </section>
 
             <style className="hover"></style>
-
-            <section className="demo">
-            <div className="card"></div>
-            <span className="operator">+</span>
-            <div className="card">
-                <span>color-dodge</span>
-            </div>
-            <span className="operator">+</span>
-            <div className="card">
-                <span>color-dodge</span>
-            </div>
-            </section>
         </main>
 
-        <section className="promo">
+        {/* <section className="promo">
             <p>
             <a target="_top" href="https://codepen.io/simeydotme/pen/abYWJdX">
                 View Version 2, much improved here
@@ -85,7 +70,7 @@ export default function Card() {
                 />
             </a>
             </p>
-        </section>
+        </section> */}
         </div>
     );
 }

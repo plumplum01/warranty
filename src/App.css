@@ -1,46 +1,18 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* 메인 */
+.openContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 
 
 /* 포켓몬 카드 */
@@ -48,27 +20,41 @@
   --color1: rgb(0, 231, 255);
   --color2: rgb(255, 0, 231);
   --back: url(https://cdn2.bulbagarden.net/upload/1/17/Cardback.jpg);
-  --charizard1: #fac;
-  --charizard2: #ddccaa;
-  --charizardfront: url(https://assets.codepen.io/13471/charizard-gx.webp);
-  --pika1: #54a29e;
-  --pika2: #a79d66;
-  --pikafront: url(https://assets.codepen.io/13471/pikachu-gx.webp);
   --eevee1: #efb2fb;
   --eevee2: #acc6f8;
-  --eeveefront: url(https://assets.codepen.io/13471/eevee-gx.webp);
-  --mewtwo1: #efb2fb;
-  --mewtwo2: #acc6f8;
-  --mewtwofront: url(https://assets.codepen.io/13471/mewtwo-gx.webp);
+  --eeveefront: url(https://i.pinimg.com/736x/18/f0/12/18f01280b7e650840ea0dbff249c3f12.jpg);
+}
+
+@keyframes holoSparkle {
+  0%, 100% {
+    opacity: 0.75;
+    background-position: 50% 50%;
+    filter: brightness(1.2) contrast(1.25);
+  }
+  5%, 8% {
+    opacity: 1;
+    background-position: 40% 40%;
+    filter: brightness(0.8) contrast(1.2);
+  }
+  35%, 38% {
+    opacity: 1;
+    background-position: 60% 60%;
+    filter: brightness(1) contrast(1);
+  }
 }
 
 @media screen and (min-width: 600px) {
   .cards {
     flex-direction: row;
   }
+
+  .card {
+    width: clamp(150px, 25vw, 300px);
+    height: calc(clamp(150px, 25vw, 300px) * 1.4);
+  }
 }
 
-.demo,.cards { 
+.cards, .demo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,93 +62,49 @@
   perspective: 2000px;
   position: relative;
   z-index: 1;
-  transform: translate3d(0.1px, 0.1px, 0.1px )
+  transform: translate3d(0.1px, 0.1px, 0.1px);
 }
-
-
 
 .demo {
   flex-direction: row;
   justify-content: center;
 }
 
-@media screen and (min-width: 600px) {
-  .card {
-    width: clamp(150px, 25vw, 300px); /* 데스크탑에서 너비 제한 */
-    height: calc(clamp(150px, 25vw, 300px) * 1.4); /* 높이 비율 유지 */
-  }
-}
-
 .card {
-  width: clamp(200px, 30vw, 400px); /* 카드 너비를 200px에서 400px 사이로 제한 */
-  height: calc(clamp(200px, 30vw, 400px) * 1.4); /* 높이는 너비의 비율로 설정 */
+  width: clamp(200px, 30vw, 400px);
+  height: calc(clamp(200px, 30vw, 400px) * 1.4);
   position: relative;
-  overflow: hidden;
   margin: 20px;
-  overflow: hidden;
-  z-index: 10;
-  touch-action: none;
-  
   border-radius: 5% / 3.5%;
-  box-shadow: 
-    -5px -5px 5px -5px var(--color1), 
-    5px 5px 5px -5px var(--color2), 
-    -7px -7px 10px -5px transparent, 
-    7px 7px 10px -5px transparent, 
-    0 0 5px 0px rgba(255,255,255,0),
-    0 55px 35px -20px rgba(0, 0, 0, 0.5);
-  
-  transition: all 0.5s ease, 
-  box-shadow 0.2s ease;
-  will-change: transform, filter;
-  
+  box-shadow: -5px -5px 5px -5px var(--color1),
+              5px 5px 5px -5px var(--color2),
+              -7px -7px 10px -5px transparent,
+              7px 7px 10px -5px transparent,
+              0 0 5px 0px rgba(255, 255, 255, 0),
+              0 55px 35px -20px rgba(0, 0, 0, 0.5);
   background-color: #040712;
   background-image: var(--front);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  touch-action: none;
+  overflow: hidden;
+  z-index: 10;
   transform-origin: center;
-  
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background-position 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
 }
 
 .card:hover {
-  box-shadow: -20px -20px 30px -25px var(--color1), 
-              20px 20px 30px -25px var(--color2), 
-              -7px -7px 10px -5px var(--color1), 
-              7px 7px 10px -5px var(--color2), 
-              0 0 13px 4px rgba(255,255,255,0.3),
+  box-shadow: -20px -20px 30px -25px var(--color1),
+              20px 20px 30px -25px var(--color2),
+              -7px -7px 10px -5px var(--color1),
+              7px 7px 10px -5px var(--color2),
+              0 0 13px 4px rgba(255, 255, 255, 0.3),
               0 55px 35px -20px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05) rotateX(5deg) rotateY(5deg);
 }
 
-.card.charizard {
-  --color1: var(--charizard1);
-  --color2: var(--charizard2);
-  --front: var(--charizardfront);
-}
-
-.card.pika {
-  --color1: var(--pika1);
-  --color2: var(--pika2);
-  --front: var(--pikafront);
-}
-
-.card.mewtwo {
-  --color1: var(--mewtwo1);
-  --color2: var(--mewtwo2);
-  --front: var(--mewtwofront);
-}
-
-.card.eevee {
-  --color1: #ec9bb6;
-  --color2: #ccac6f;
-  --color3: #69e4a5;
-  --color4: #8ec5d6;
-  --color5: #b98cce;
-  --front: var(--eeveefront);
-}
-
-.card:before,
-.card:after {
+.card:before, .card:after {
   content: "";
   position: absolute;
   left: 0;
@@ -170,13 +112,14 @@
   bottom: 0;
   top: 0;
   background-repeat: no-repeat;
+  background-position: 50% 50%;
+  z-index: 1;
   opacity: 0.5;
   mix-blend-mode: color-dodge;
-  transition: all 0.33s ease;
+  transition: background-position 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
 }
 
 .card:before {
-  background-position: 50% 50%;
   background-size: 300% 300%;
   background-image: linear-gradient(
     115deg,
@@ -187,24 +130,38 @@
     var(--color2) 75%,
     transparent 100%
   );
-  opacity: 0.5;
   filter: brightness(0.5) contrast(1);
-  z-index: 1;
 }
 
 .card:after {
-  opacity: 1;
   background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
-    url(https://assets.codepen.io/13471/holo.png),
-    linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
-  background-position: 50% 50%;
+                    url(https://assets.codepen.io/13471/holo.png),
+                    linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
   background-size: 160%;
   background-blend-mode: overlay;
   z-index: 2;
   filter: brightness(1) contrast(1);
-  transition: all 0.33s ease;
-  mix-blend-mode: color-dodge;
   opacity: 0.75;
+}
+
+.card:hover:before {
+  background-position: 60% 60%;
+  filter: brightness(0.75) contrast(1.25);
+}
+
+.card:hover:after {
+  background-position: 60% 60%;
+  filter: brightness(1.2) contrast(1.5);
+  opacity: 1;
+}
+
+.card.eevee {
+  --color1: #ec9bb6;
+  --color2: #ccac6f;
+  --color3: #69e4a5;
+  --color4: #8ec5d6;
+  --color5: #b98cce;
+  --front: var(--eeveefront);
 }
 
 .card.eevee:hover {
@@ -226,94 +183,13 @@
   );
 }
 
-.card.active:after,
-.card:hover:after {
-  filter: brightness(1) contrast(1);
-  opacity: 1;
+/* 웹캠 */
+#container {
+  width:100vw;
+  height:100vh;
 }
-
-.card.active,
-.card:hover {
-  animation: none;
-  transition: box-shadow 0.1s ease-out;
-}
-
-.card.animated {
-  transition: none;
-  animation: holoCard 12s ease 0s 1;
-}
-
-.card.animated:before {
-  transition: none;
-  animation: holoGradient 12s ease 0s 1;
-}
-
-.card.animated:after {
-  transition: none;
-  animation: holoSparkle 12s ease 0s 1;
-}
-
-@keyframes holoSparkle {
-  0%, 100% {
-    opacity: 0.75;
-    background-position: 50% 50%;
-    filter: brightness(1.2) contrast(1.25);
-  }
-  5%, 8% {
-    opacity: 1;
-    background-position: 40% 40%;
-    filter: brightness(0.8) contrast(1.2);
-  }
-  35%, 38% {
-    opacity: 1;
-    background-position: 60% 60%;
-    filter: brightness(1) contrast(1);
-  }
-}
-
-@keyframes holoGradient {
-  0%, 100% {
-    opacity: 0.5;
-    background-position: 50% 50%;
-    filter: brightness(0.5) contrast(1);
-  }
-  5%, 9% {
-    background-position: 100% 100%;
-    opacity: 1;
-    filter: brightness(0.75) contrast(1.25);
-  }
-}
-
-@keyframes holoCard {
-  0%, 100% {
-    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
-  }
-  5%, 8% {
-    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
-  }
-  35%, 38% {
-    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
-  }
-}
-
-html, body {
+  #videoElement {
+  width: 100%;
   height: 100%;
-  background-color: #333844;
-  padding: 0;
-  transform: translate3d(0, 0, 0.1px);
-}
-
-body {
-  color: white;
-  font-family: "Heebo", sans-serif;
-  text-align: center;
-}
-
-h1 {
-  margin: 30px 0;
-}
-
-p {
-  margin: 5px 0;
-  font-weight: 200;
+  background-color: #666;
 }

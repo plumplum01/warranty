@@ -4,9 +4,10 @@ import './index.css'
 import './App.css'
 import App from './App.jsx'
 import Card from './card'
+import Open from './open'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Card />
+    <App/>
   </StrictMode>,
 )
