@@ -19,10 +19,12 @@ export default function Photo() {
     }, []); // 빈 배열을 전달하여 컴포넌트 마운트 시 한 번만 실행
 
     return (
-        <section>
-            <h1>Hello Neuhas</h1>
-            <div id="container">
+        <section className="camWrapper">
+            <div id="camContainer">
                 <video autoPlay playsInline ref={videoRef} id="videoElement"></video>
+            </div>
+            <div className="imgContainer">
+            <img src={`${process.env.PUBLIC_URL}/assets/cardfix.png`} alt="Card" />
             </div>
         </section>
     );
